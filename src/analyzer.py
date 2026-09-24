@@ -39,7 +39,7 @@ DOCUMENT TYPE INSTRUCTIONS:
 """
 
     response = client.responses.create(
-        model="gpt-5-mini",
+        model="gpt-5.6-luna",
         instructions=instructions,
         input=f"""
 SOURCE NOTES:

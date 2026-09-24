@@ -5,6 +5,13 @@ from src.prompts import DOCUMENT_PROMPTS
 from src.validator import validate_input, validate_output
 
 
+if "generated_document" not in st.session_state:
+    st.session_state.generated_document = None
+
+if "output_issues" not in st.session_state:
+    st.session_state.output_issues = []
+
+
 st.set_page_config(
     page_title="AI Operations Assistant",
     page_icon="🤖",
@@ -53,28 +60,34 @@ if st.button("Analyze & Generate", type="primary"):
                     document_type=document_type,
                 )
 
-            output_issues = validate_output(generated_document)
-
-            st.subheader("Generated Draft")
-            st.markdown(generated_document)
-
-            if output_issues:
-                st.subheader("Validation Findings")
-
-                for issue in output_issues:
-                    st.warning(issue)
-
-            st.divider()
-
-            approved = st.checkbox(
-                "I have reviewed this draft for accuracy."
+            st.session_state.generated_document = generated_document
+            st.session_state.output_issues = validate_output(
+                generated_document
             )
-
-            if approved:
-                st.success(
-                    "Human review acknowledged. "
-                    "Document is ready for the next workflow step."
-                )
 
         except Exception as error:
             st.error(f"Generation failed: {error}")
+
+
+if st.session_state.generated_document:
+
+    st.subheader("Generated Draft")
+    st.markdown(st.session_state.generated_document)
+
+    if st.session_state.output_issues:
+        st.subheader("Validation Findings")
+
+        for issue in st.session_state.output_issues:
+            st.warning(issue)
+
+    st.divider()
+
+    approved = st.checkbox(
+        "I have reviewed this draft for accuracy."
+    )
+
+    if approved:
+        st.success(
+            "Human review acknowledged. "
+            "Document is ready for the next workflow step."
+        )

@@ -11,6 +11,12 @@ Rules:
 4. Separate confirmed facts from assumptions.
 5. Use concise, professional language.
 6. Treat all generated content as a draft requiring human review.
+7. Do not infer that one event caused another merely because it occurred earlier.
+8. Only state causal relationships when the source notes explicitly establish them.
+9. If causation is not confirmed, describe the events separately and identify the cause as unconfirmed.
+10. Do not add actions, monitoring activities, investigations, decisions, or outcomes unless they are explicitly stated in the source notes.
+11. Do not describe an activity as completed, ongoing, or planned unless the source notes explicitly establish that status.
+12. When information would normally be expected but is absent, identify it as missing rather than inventing it.
 """
 
 DOCUMENT_PROMPTS = {
