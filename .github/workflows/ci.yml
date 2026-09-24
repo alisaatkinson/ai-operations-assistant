@@ -32,3 +32,6 @@ jobs:
           python -m py_compile src/analyzer.py
           python -m py_compile src/prompts.py
           python -m py_compile src/validator.py
+
+      - name: Run automated tests
+        run: pytest
